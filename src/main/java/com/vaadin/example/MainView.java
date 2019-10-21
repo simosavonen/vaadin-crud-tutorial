@@ -1,5 +1,6 @@
 package com.vaadin.example;
 
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.notification.Notification;
@@ -21,6 +22,8 @@ public class MainView extends VerticalLayout {
     private Grid<Customer> grid = new Grid<>(Customer.class);
     private TextField filterText = new TextField();
 
+    private CustomerForm form = new CustomerForm(this);
+
     public MainView() {
 
         filterText.setPlaceholder("Filter by name...");
@@ -30,8 +33,11 @@ public class MainView extends VerticalLayout {
 
         grid.setColumns("firstName", "lastName", "status" );
 
-        add(filterText, grid);
-        setSizeFull();
+        HorizontalLayout mainContent = new HorizontalLayout(grid, form);
+        mainContent.setSizeFull();
+        grid.setSizeFull();
+
+        add(filterText, mainContent);
 
         updateList();
     }
