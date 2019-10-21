@@ -26,6 +26,8 @@ public class MainView extends VerticalLayout {
 
     public MainView() {
 
+
+
         filterText.setPlaceholder("Filter by name...");
         filterText.setClearButtonVisible(true);
         filterText.setValueChangeMode(ValueChangeMode.EAGER);
@@ -39,7 +41,15 @@ public class MainView extends VerticalLayout {
 
         add(filterText, mainContent);
 
+        setSizeFull();
+
         updateList();
+
+        form.setCustomer(null);
+
+        grid.asSingleSelect().addValueChangeListener(event ->
+                form.setCustomer(grid.asSingleSelect().getValue()));
+
     }
 
     public void updateList() {
